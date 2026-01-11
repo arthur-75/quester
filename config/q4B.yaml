@@ -1,0 +1,63 @@
+
+#q4B
+
+
+## Data
+dataset: msmarco
+data_path: data/text_data/
+index_path: data/index_data/
+split: train
+seed: 30
+num_train: 500000
+keywords_corpus: False
+
+## Model 
+sft_lora_dir: " "
+model_name: Qwen/Qwen3-4B
+trained_lora : False
+lora:
+  r: 40
+  alpha: 40
+  dropout: 0.2
+#3800
+## Training / GRPO
+grpo:
+  output_dir: /data/satouf/grpo/checkpoints/Qwen3-4B-kl_beta-test-softCE500-40-ndcgGRPO_MSMARCO #softCE100-100-40-ndcgGRPO_MSMARCO_Qwen3-4B
+  learning_rate: 0.000005 
+  epochs: 2
+  batch_size: 16      # GRPO’s "gradient_accum_steps" handles the rest
+  num_generations: 10
+  max_prompt_length: 230
+  max_completion_length: 64
+  gradient_accumulation_steps: 20
+  top_k: 500 
+  top_p: .95
+  temperature: 1.2
+  repetition_penalty: 1.2
+  save_steps: 100
+  logging_steps: 10
+  kl_beta: 0 # 0.01
+
+# Reranker 
+ReRank_batch : 0
+
+
+#Prompte 
+#SYSTEM_PROMPT: "[TASK] Generate relevant single-word keywords to improve retrieval performance. Only output unique keywords, separated by commas."
+SYSTEM_PROMPT: "Generate relevant single-word keywords to improve retrieval performance. Only output unique keywords, separated by commas."
+#SYSTEM_PROMPT: "Generate unique, relevant single-word keywords to improve retrieval. Output only the keywords, comma-separated (e.g., word1, ..., word n)."
+#SYSTEM_PROMPT: "Generate relevant single-word keywords that help retrieve documents about the user’s query. Each keyword must be different from the others. Output them as a comma-separated list (e.g., word1, word2, ... word n)."
+#system_prompt: "Generate relevant keyword terms to improve retrieval performance. Only output the keywords, separated by commas." Output as a comma-separated list (e.g., word1, word2, word3).
+#SYSTEM_PROMPT: "Generate relevant single-word keywords to improve retrieval performance. Only output unique, synonyme or relvant keywords, separated by commas."
+#SYSTEM_PROMPT: "Generate unique, single-word keywords that improve retrieval performance. Only output relevant terms, including synonyms and related concepts, separated by commas."
+output_keywords: True
+reward:
+    top_k: 100
+    tau: 0.5
+    ce_tsv_path : data/CE_data/dictCE.tsv
+    add_init: False
+
+#SYSTEM_PROMPT: "Enhance the query to improve retrieval performance by adding relevant terms. Only output the final version of the query."
+#Output the rewrite of the input query
+
+ 
