@@ -1,5 +1,5 @@
 # QueStER
-Accepted paper at e ACL
+Accepted paper at e-ACL
 ## Title:
 QueStER: Query Specification for Generative Keyword-Based Retrieval
 ## Abstrect:
