@@ -8,4 +8,9 @@ Generative retrieval (GR) differs from the traditional index–then–retrieve p
 ## Author: 
 Arthur SATOUF, Yuxuan ZONG, Habiboulaye Amadou Boubacar, Pablo Piantanida, Benjamin Piwowarski
 
+
+## Model & checkpoints
+
+https://huggingface.co/Arthur-75/quester-qwen3-4B
+
 in progress... 
